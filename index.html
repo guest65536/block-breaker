@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#10141C">
+  <title>ブロックくずし</title>
+
+  <!-- PWA(ホーム画面追加・オフライン対応) -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ブロックくずし">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- 上部: スコア・ステージ・のこり + 操作ボタン -->
+    <header class="topbar">
+      <div class="info">
+        <div class="stat">
+          <span class="stat-label">スコア</span>
+          <span id="score" class="stat-value">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">ステージ</span>
+          <span id="stage" class="stat-value">1</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">のこり</span>
+          <span id="lives" class="stat-value">5</span>
+        </div>
+      </div>
+      <div class="topbar-buttons">
+        <button id="mute-btn" class="icon-btn" aria-label="音のオン・オフ">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
+        <button id="pause-btn" class="icon-btn" aria-label="一時停止">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- 中央: ゲーム画面(ブロック・ボール・バーを描画) -->
+    <main class="play-area">
+      <canvas id="game" class="game"></canvas>
+    </main>
+
+    <!-- 下部: 指を置く操作エリア(ゲームフィールド外) -->
+    <div id="control-strip" class="control-strip">
+      <span class="control-hint">ここを指でなぞって バーをうごかす</span>
+    </div>
+
+    <!-- スタート／使い方 -->
+    <div id="start-screen" class="overlay">
+      <div class="overlay-card">
+        <h1 class="overlay-title">ブロックくずし</h1>
+        <div class="howto">
+          <p><span class="badge">なぞる</span> 下のエリアを指でなぞってバーを左右へ</p>
+          <p><span class="badge">あてる</span> ボールをバーで打ち返す</p>
+          <p><span class="badge">こわす</span> ブロックを全部消すとステージクリア</p>
+        </div>
+        <button id="start-btn" class="big-btn">スタート</button>
+      </div>
+    </div>
+
+    <!-- 一時停止 -->
+    <div id="pause-screen" class="overlay hidden">
+      <div class="overlay-card">
+        <h2 class="overlay-title">一時停止</h2>
+        <button id="resume-btn" class="big-btn">つづける</button>
+      </div>
+    </div>
+
+    <!-- ゲームオーバー -->
+    <div id="gameover-screen" class="overlay hidden">
+      <div class="overlay-card">
+        <h2 class="overlay-title">おしまい</h2>
+        <p class="final-line">スコア <span id="final-score">0</span></p>
+        <button id="retry-btn" class="big-btn">もう一度</button>
+      </div>
+    </div>
+
+    <!-- 全面クリア -->
+    <div id="allclear-screen" class="overlay hidden">
+      <div class="overlay-card">
+        <h2 class="overlay-title">全部クリア！</h2>
+        <p class="final-line">おめでとう！ スコア <span id="clear-score">0</span></p>
+        <button id="again-btn" class="big-btn">もう一度</button>
+      </div>
+    </div>
+
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+/* ===== 基本設定 ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+:root {
+  --bg: #10141C;
+  --panel: #1B2130;
+  --panel-light: #26304A;
+  --text: #FFFFFF;
+  --text-dim: #AEB9D4;
+  --accent: #00E5FF;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  overflow: hidden;
+  overscroll-behavior: none;
+  /* スマホの「文字自動拡大」でレイアウトが崩れないように抑制 */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* ===== 全体レイアウト(縦画面) ===== */
+.app {
+  height: 100dvh;
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: env(safe-area-inset-top) 10px calc(env(safe-area-inset-bottom) + 8px);
+  gap: 8px;
+}
+
+/* ===== 上部バー ===== */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.info {
+  display: flex;
+  gap: 18px;
+  min-width: 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.topbar-buttons {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.icon-btn {
+  width: 52px;
+  height: 52px;
+  border: none;
+  border-radius: 14px;
+  background: var(--panel-light);
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.icon-btn svg {
+  width: 26px;
+  height: 26px;
+  fill: currentColor;
+}
+
+.icon-btn:active {
+  background: var(--accent);
+  color: #04121A;
+}
+
+/* ===== ゲーム画面 ===== */
+.play-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.game {
+  background: #0A0D13;
+  border: 3px solid var(--panel-light);
+  border-radius: 8px;
+  display: block;
+  touch-action: none;
+}
+
+/* ===== 操作エリア(指を置く場所・フィールド外) ===== */
+.control-strip {
+  height: clamp(110px, 19vh, 190px);
+  flex-shrink: 0;
+  background: var(--panel-light);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  touch-action: none;
+  position: relative;
+  /* すべらせやすい手触りのための縦じま模様 */
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 0 2px,
+    transparent 2px 22px
+  );
+}
+
+.control-strip:active {
+  background-color: #2E3B5E;
+}
+
+.control-hint {
+  font-size: 16px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+
+/* ===== オーバーレイ ===== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 9, 15, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 10;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.overlay-card {
+  background: var(--panel);
+  border-radius: 24px;
+  padding: 32px 26px;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.overlay-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 3px;
+}
+
+.howto {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 18px;
+  color: var(--text);
+  text-align: left;
+}
+
+.howto p {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 74px;
+  padding: 6px 8px;
+  background: var(--panel-light);
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--accent);
+}
+
+.big-btn {
+  width: 100%;
+  padding: 22px;
+  font-size: 28px;
+  font-weight: 800;
+  border: none;
+  border-radius: 18px;
+  background: var(--accent);
+  color: #04121A;
+  cursor: pointer;
+}
+
+.big-btn:active {
+  filter: brightness(0.85);
+}
+
+.final-line {
+  font-size: 22px;
+  color: var(--text);
+}
+
+.final-line span {
+  font-weight: 800;
+  color: var(--accent);
+}

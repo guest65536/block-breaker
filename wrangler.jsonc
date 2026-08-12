@@ -1,0 +1,9 @@
+{
+  "name": "block-breaker",
+  "compatibility_date": "2025-01-01",
+  "assets": {
+    "directory": "./"
+  },
+  "workers_dev": true,
+  "preview_urls": false
+}
